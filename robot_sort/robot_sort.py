@@ -96,8 +96,58 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+
+        if self.can_move_right() == False:
+            return
+
+        # light goes no to let us know we have swaped
+        self.set_light_on()
+        while(True):
+            # After we have finished sorting all the items we want to pick up none
+            if self.can_move_right() == False:
+                if self.light_is_on() == False:
+                    self.swap_item()
+                    print("we are finished")
+                    break
+                self.set_light_off()
+                self.swap_item()
+                while(self.can_move_left()):
+                    self.move_left()
+
+                self.swap_item()
+
+                continue
+
+            self.move_right()
+            if self.compare_item() == 1:
+            #Carried item is larger than item at positon
+            # place it down
+                print("Item that is larger", self._item)
+                self.swap_item()
+                print("Item that is smaller", self._item)
+                print(self._list)
+            #have to pick up nothing again so we
+                self.move_left()
+                self.swap_item()
+                print(self._item)
+                # print("-------------")
+                self.move_right()
+            # dropping nothing to
+                self.swap_item()
+                print(self._list)
+                self.set_light_on()
+                continue
+            if self.compare_item() == -1 or self.compare_item() == 0:
+                # print("comparing items less and equal")
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+                self.swap_item()
+                continue
+
+
+
+
 
 
 if __name__ == "__main__":

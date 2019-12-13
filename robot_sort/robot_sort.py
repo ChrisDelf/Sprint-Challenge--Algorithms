@@ -97,7 +97,32 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        # if the robot cannot move right then it has nothing to sort.
+
+        if self.can_move_right() == False:
+            return
+        k = self.swap_item()
+        print(k)
+        # # to show that the robot is holding onto an item.
+        self.set_light_on()
+        # we are initialy holding on to none
+        while True:
+
+            if self.can_move_right() == False:
+                if self.set_light_on() == False:
+
+                    self.swap_item()
+
+                break
+            while(self.move_left()):
+                self.mover_left()
+                self.swap_item()
+                self.set_light_on()
+                continue
+
+
+
+        return 1
 
 
 if __name__ == "__main__":
